@@ -8,6 +8,11 @@ const getContact = (req, res) => {
 //@route Post /api/contacts
 //@access Public
 const addContact = (req, res) => {
+  console.log(req.body);
+  const { name, email, phone } = req.body;
+  if (!name || !email || !phone) {
+    return res.status(400).json({ message: "Please enter all fields" });
+  }
   res.status(200).json({ message: "Create a new contact" });
 };
 //@desc Get Single Contacts
