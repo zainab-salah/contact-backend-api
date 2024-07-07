@@ -10,6 +10,7 @@ const port = process.env.PORT || 8080;
 
 app.use(express.json()); // parse data stream from the client
 app.use("/api/contacts", require("./routes/contactsRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 app.use(errorHandler);
 
 app.listen(port, () => {
