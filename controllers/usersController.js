@@ -70,12 +70,17 @@ const loginUser = asyncHandler(async (req, res) => {
 //@route Post /api/user/current
 //@access Private
 const currentUser = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return res.status(400).json({ message: "Please enter all fields" });
+  const user = await User.findById(req.user.id).select('-password');
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error("User not found");
   }
 });
-module.exports = {
+
+
+module.exports = { 
   reigsterUser,
   loginUser,
   currentUser,
